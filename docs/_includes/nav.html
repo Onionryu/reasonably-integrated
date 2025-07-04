@@ -2,21 +2,21 @@
 {% assign documentation = site.pages | where: 'dir', '/documentation/' %}
 
 <nav class="navigation">
-    <a href="/">Home</a>
+    <a href="{{ site.basepath }}/">Home</a>
 </nav>
 <nav class="navigation">
     <details>
         <summary>Data Formats and Endpoints</summary>
         {% for page in data-formats-and-endpoints %}
-            <a href="{{ page.url }}">{{ page.title }}</a>
+            <a href="{{ site.basepath }}{{ page.url }}">{{ page.title }}</a>
         {% endfor %}
     </details>
 </nav>
 <nav class="navigation">
     <details>
         <summary>Documentation</summary>
-        {% for page in data-formats-and-endpoints %}
-            <a href="{{ page.url }}">{{ page.title }}</a>
+        {% for page in documentation %}
+            <a href="{{ site.basepath }}{{ page.url }}">{{ page.title }}</a>
         {% endfor %}
     </details>
 </nav>
