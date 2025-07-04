@@ -1,5 +1,7 @@
+{% assign data-formats-and-endpoints = site.pages | where: 'dir', '/data-formats-and-endpoints/' %}
+
 <nav>
-    {% for page in site.pages | where: "dir", "/data-formats-and-endpoints/*" %}
+    {% for page in data-formats-and-endpoints %}¨
         <a href="{{ page.url }}">{{ page.title }}</a>
     {% endfor %}
 </nav>
