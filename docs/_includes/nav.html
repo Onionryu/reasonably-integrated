@@ -1,6 +1,10 @@
 {% assign data-formats-and-endpoints = site.pages | where: 'dir', '/data-formats-and-endpoints/' %}
+{% assign documentation = site.pages | where: 'dir', '/documentation/' %}
 
-<nav>
+<nav class="navigation">
+    <a href="/">Home</a>
+</nav>
+<nav class="navigation">
     <details>
         <summary>Data Formats and Endpoints</summary>
         {% for page in data-formats-and-endpoints %}
@@ -8,8 +12,11 @@
         {% endfor %}
     </details>
 </nav>
-<nav>
-    {% for page in site.pages %}
-        <a href="{{ page.url }}">{{ page.dir }}</a>
-    {% endfor %}
+<nav class="navigation">
+    <details>
+        <summary>Documentation</summary>
+        {% for page in data-formats-and-endpoints %}
+            <a href="{{ page.url }}">{{ page.title }}</a>
+        {% endfor %}
+    </details>
 </nav>
