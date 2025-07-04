@@ -1,3 +1,7 @@
+---
+title: Data Formats
+---
+
 A brief description on data formats that you might encounter.
 
 JSON

@@ -1,5 +1,10 @@
 <nav>
-    {% for page in site.pages %}
+    {% for page in site.pages | where: "dir", "/data-formats-and-endpoints/*" %}
         <a href="{{ page.url }}">{{ page.title }}</a>
+    {% endfor %}
+</nav>
+<nav>
+    {% for page in site.pages %}
+        <a href="{{ page.url }}">{{ page.dir }}</a>
     {% endfor %}
 </nav>
