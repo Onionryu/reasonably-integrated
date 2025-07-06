@@ -1,5 +1,7 @@
 {% assign data-formats-and-endpoints = site.pages | where: 'dir', '/data-formats-and-endpoints/' %}
 {% assign documentation = site.pages | where: 'dir', '/documentation/' %}
+{% assign environments = site.pages | where: 'dir', '/environments/' %}
+{% assign infrastructure-as-code = site.pages | where: 'dir', '/infrastructure-as-code/' %}
 
 <nav class="navigation">
     <a href="{{ site.basepath }}/">Home</a>
@@ -16,6 +18,22 @@
     <details>
         <summary>Documentation</summary>
         {% for page in documentation %}
+            <a href="{{ site.basepath }}{{ page.url }}">{{ page.title }}</a>
+        {% endfor %}
+    </details>
+</nav>
+<nav class="navigation">
+    <details>
+        <summary>Environments</summary>
+        {% for page in environments %}
+            <a href="{{ site.basepath }}{{ page.url }}">{{ page.title }}</a>
+        {% endfor %}
+    </details>
+</nav>
+<nav class="navigation">
+    <details>
+        <summary>Infrastructure as Code</summary>
+        {% for page in infrastructure-as-code %}
             <a href="{{ site.basepath }}{{ page.url }}">{{ page.title }}</a>
         {% endfor %}
     </details>
