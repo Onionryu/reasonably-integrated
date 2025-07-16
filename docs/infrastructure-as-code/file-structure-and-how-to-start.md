@@ -78,6 +78,7 @@ param storageAccountName = 'intstoragedev'
 
 In this case you can just separate the files into their own folders to keep them separated and name them accordingly to easily keep track on what is where.
 
+```text
 ├─ ResourceGroup
 │  ├─ resourceGroup.bicep
 │  ├─ resourceGroup.dev.bicepparam
@@ -88,11 +89,13 @@ In this case you can just separate the files into their own folders to keep them
    ├─ storageAccount.dev.bicepparam
    ├─ storageAccount.test.bicepparam
    └─ storageAccount.prod.bicepparam
+```
 
 Maybe you also have some high level settings in one resource and you only want to modify the configuration of it instead. This will become more evident in solutions like Logic Apps Standard and Functions where you can have one solution that you would want to deploy without changing the high level settings. For these components I would recommend just simply separating the bicep deployment files into base resources that are propably deployed only once and then configuration files which use an existing resource.
 
 Now you should have the resources neatly in different files and you only deploy the ones that are changed, this also helps with keeping track on what has been deployed and when. It should also improve performance since Azure is not checking the template for changes.
 
+```text
 ├─ ResourceGroup
 │  ├─ resourceGroup.bicep
 │  ├─ resourceGroup.dev.bicepparam
@@ -109,6 +112,7 @@ Now you should have the resources neatly in different files and you only deploy 
       ├─ appSetting.dev.bicepparam
       ├─ appSetting.test.bicepparam
       └─ appSetting.prod.bicepparam
+```
 
 # Modules
 Next up on the list is the discussion on modules, if you have a larger environment where some things might be repeating multiple times, like the deployment of a storage account. If you want to update or make changes to it, it quickly becomes a hassle to deal with and is prone to mistakes due to having to manually update many different files. Luckily there is a fairly easy answer to this one and that is modules.
@@ -127,6 +131,7 @@ module storageAccountDeployment '../storageAccount.bicep' = {
 
 Now you can easily make changes to resources and have it take effect on the rest of the solution. The modules do not need a separate parameter file, because it will provide those from the original location and pass it through to the module file.
 
+```text
 ├─ StorageAccount
 │   ├─ storageAccount.bicep
 │   ├─ storageAccount.dev.bicepparam
@@ -135,12 +140,14 @@ Now you can easily make changes to resources and have it take effect on the rest
 └─ Modules
    └─ StorageAccount
       └─ storageAccount.bicep
+```
 
 > Documentation: https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/modules
 
 # Versioning
 So, what happens if you want to make changes to the module file that could break solutions and you don't have the time to update everything or you are working in a team? The easy answer is versioning. This is simply adding a folder in front of the Modules side and adding a new one whenever it seems appropriate, usually when there are changes to the parameters. Then it can be adopted into use individually instead of breaking solutions right away by just changing the file path to the new version.
 
+```text
 ├─ StorageAccount
 │   ├─ storageAccount.bicep
 │   ├─ storageAccount.dev.bicepparam
@@ -152,6 +159,7 @@ So, what happens if you want to make changes to the module file that could break
       │  └─ storageAccount.bicep
       └─ v2
          └─ storageAccount.bicep
+```
 
 # What should be in a single deployment file?
 
