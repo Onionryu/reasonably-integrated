@@ -46,11 +46,17 @@ Adding this header to the call gives us a different response this time, more spe
 # Resolving second issue
 After some more digging around we find out that the request is failing because the Storage account defaults to sending application/atom+xml as a media type. If we now add an Accept: application/json to the request we finally get an actual response with 200 status message!
 
-# Alternate issue
+# Alternate issues
 If you later on decide to test just the Accept application/json Header, you will get the same 403 Forbidden response with XML as a error message, pretty weird.
+
+In blob storage side, use additionally x-ms-blob-type: BlockBlob and Content-type: application/octet-stream headers.
+
+If you are getting InvalidProtocolResponse as an error when inputting information, try turning off the HTTP Allow chunking setting.
 
 # TLDR
 - Directly use the HTTP Action on Logic Apps
 - Enable System-assigned Identity to the Logic Apps
 - Add the Storage Account role assignments to the Logic Apps Identity
 - Add the Headers: x-ms-version: 2017-11-09 and Accept: application/json
+- For blob storage also add Headers: x-ms-blob-type: BlockBlob and Content-type: application/octet-stream
+- If you are getting errors while inputting data, go to HTTP action settings and turn off Allow chunking option
