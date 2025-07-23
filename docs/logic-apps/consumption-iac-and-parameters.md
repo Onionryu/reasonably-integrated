@@ -6,7 +6,7 @@ date: 2025-07-23
 So you have made some Consumption Logic Apps and now you're thinking about how to turn them into proper solutions with IaC and Bicep.
 
 Let's first take a look on what happens when we insert a parameter inside the designer:
-![Screenshot of a Logic App Parameter.](/images/logic-apps/consumption-iac-and-parameters-1.png)
+![Screenshot of a Logic App Parameter.](../images/logic-apps/consumption-iac-and-parameters-1.png)
 Now we have a parameter that we can use in our solution with the following values:
 Name: sample
 Type: String
@@ -129,7 +129,7 @@ resource logicAppConsumption 'Microsoft.Logic/workflows@2019-05-01' = {
 }
 ```
 Once you have deployed this template it will now properly show you that the parameter also has an actual value assigned:
-![Screenshot of a Logic App Parameter.](/images/logic-apps/consumption-iac-and-parameters-2.png)
+![Screenshot of a Logic App Parameter.](../images/logic-apps/consumption-iac-and-parameters-2.png)
 
 # Separation of Environments
 Now the next step is to have different values per environment. For that to work properly we are going to need some separate parameter files in our solution.
