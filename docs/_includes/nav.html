@@ -2,6 +2,7 @@
 {% assign documentation = site.pages | where: 'dir', '/documentation/' %}
 {% assign environments = site.pages | where: 'dir', '/environments/' %}
 {% assign infrastructure-as-code = site.pages | where: 'dir', '/infrastructure-as-code/' %}
+{% assign logic-apps = site.pages | where: 'dir', '/logic-apps/' %}
 
 <nav class="navigation">
     <a href="{{ site.basepath }}/">Home</a>
@@ -34,6 +35,14 @@
     <details>
         <summary>Infrastructure as Code</summary>
         {% for page in infrastructure-as-code %}
+            <a href="{{ site.basepath }}{{ page.url }}">{{ page.title }}</a>
+        {% endfor %}
+    </details>
+</nav>
+<nav class="navigation">
+    <details>
+        <summary>Logic Apps</summary>
+        {% for page in logic-apps %}
             <a href="{{ site.basepath }}{{ page.url }}">{{ page.title }}</a>
         {% endfor %}
     </details>

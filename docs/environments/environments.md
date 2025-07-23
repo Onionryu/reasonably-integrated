@@ -17,6 +17,7 @@ typically used for end-to-end testing
 highly controlled environment
 
 > BONUS: Additional Environments
+
 # UAT/QA Environment
 You can add additional environments if needed, these are not hard rules that you should limit yourself to, but for a good reason these are industry standards. One reason to add another environment besides test is that if consumer has specific testing needs or things are done in longer sprints. This would allow you to have a more finely tuned control on what goes to which environment and allows you to continue development and release to test in the meanwhile.
 
