@@ -1,5 +1,5 @@
 ---
-title: Logic Apps Consumption and Storage Account with Managed Identity
+title: Logic Apps consumption and Storage Account with Managed Identity
 date: 2025-07-23
 ---
 # Intro

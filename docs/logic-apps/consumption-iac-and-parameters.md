@@ -1,5 +1,5 @@
 ---
-title: Logic Apps Consumption IaC and Parameters
+title: Logic Apps consumption IaC and parameters
 date: 2025-07-23
 ---
 # Intro
@@ -8,10 +8,12 @@ So you have made some Consumption Logic Apps and now you're thinking about how t
 Let's first take a look on what happens when we insert a parameter inside the designer:
 ![Screenshot of a Logic App Parameter.](../images/logic-apps/consumption-iac-and-parameters-1.png)
 Now we have a parameter that we can use in our solution with the following values:
+```text
 Name: sample
 Type: String
 Default value: something
 Actual value:
+```
 
 And what we can now see by going to the Logic App code view section is something like this:
 ```json
@@ -57,7 +59,7 @@ This is now basically a usable template that you can use.
 # Bicep template
 Now let's take a look at how we could deploy this solution by turning it into a Bicep template. From the documentation we could see that the preferred way looks to be that the Bicep file itself would contain all the workflow information, this would honestly cause a lot of manual work so we're gonna sidestep that a little bit.
 
-> [Logic Apps Bicep Documentation](https://learn.microsoft.com/en-us/azure/templates/microsoft.logic/workflows?pivots=deployment-language-bicep)
+> [Logic Apps Bicep documentation](https://learn.microsoft.com/en-us/azure/templates/microsoft.logic/workflows?pivots=deployment-language-bicep)
 
 First order of business is taking in the actual Bicep file and what it needs, at minimum we have these:
 ```Bicep
@@ -75,6 +77,7 @@ The definition part has all the content that we can see in the Logic App code vi
 - Have a separate file where we copy everything from the Logic App code view, meaning that we can make changes from the portal and copy everything.
 - Import that file in the Bicep in deployment
 Now the file structure should look something like this:
+
 ```text
 └─ LogicApp
    ├─ logicAppConsumption.bicep
@@ -83,7 +86,7 @@ Now the file structure should look something like this:
 
 Luckily we can do that with the file function in Bicep quite easily with loadJsonContent. When we load it as JSON we can also select only a part of the file, meaning we can take the content of the definition part that we need.
 
-> [Bicep file functions](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-functions-files)
+> [Bicep file functions documentation](https://learn.microsoft.com/en-us/azure/azure-resource-manager/bicep/bicep-functions-files)
 
 This results in the following:
 ```Bicep
@@ -100,7 +103,7 @@ resource logicAppConsumption 'Microsoft.Logic/workflows@2019-05-01' = {
 ```
 Now this is moving the definition to Bicep without having to manually fiddle around with it every time.
 
-# Bicep Parameters
+# Bicep parameters
 Unless you want to make a separate workflow each time for different environments, we would need to take a deeper look into how the parameters are set in the workflow file and the Bicep file. If you look at the workflow definition file in properties it shows something like this:
 ```text
 ├─ definition
@@ -131,7 +134,7 @@ resource logicAppConsumption 'Microsoft.Logic/workflows@2019-05-01' = {
 Once you have deployed this template it will now properly show you that the parameter also has an actual value assigned:
 ![Screenshot of a Logic App Parameter.](../images/logic-apps/consumption-iac-and-parameters-2.png)
 
-# Separation of Environments
+# Separation of environments
 Now the next step is to have different values per environment. For that to work properly we are going to need some separate parameter files in our solution.
 ```text
 └─ LogicApp
@@ -139,7 +142,7 @@ Now the next step is to have different values per environment. For that to work 
    ├─ logicAppConsumption.dev.bicepparam
    └─ workflow.json
 ```
-Then we need to just tweak the solution slightly:
+Then we need to just tweak the bicep solution slightly:
 ```Bicep
 param name string
 param parameters object
@@ -154,7 +157,7 @@ resource logicAppConsumption 'Microsoft.Logic/workflows@2019-05-01' = {
   }
 }
 ```
-Parameter file:
+And create the parameter file:
 ```Bicep
 using './logicAppConsumption.bicep'
 
